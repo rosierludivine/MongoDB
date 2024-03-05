@@ -43,11 +43,11 @@ db.salles.find({"styles.0": "blues"},{"_id":0, "nom":1})
 
 
 ### Exercice 7 : Affichez la ville des salles dont le code postal commence par 84 et qui ont une capacité strictement inférieure à 500 places (pensez à utiliser une expression régulière).
-
+db.salles.find({ "adresse.codePostal": /^84/, "capacite" : {$lt: 500}}, {_id: 0, "adresse.ville": 1 })  A REVOIR 
 
 
 ### Exercice 8 : Affichez l’identifiant pour les salles dont l’identifiant est pair ou le champ avis est absent.
-db.salles.find({"styles.0": "blues"},{"_id":0, "nom":1})
+db.salles.find({$or: [ { "_id": { $mod: [2,0]}},{"avis": { $exists:false}}],{"_id":1}}) A REVOIR 
 
 ### Exercice 9 : Affichez le nom des salles dont au moins un des avis comporte une note comprise entre 8 et 10 (tous deux inclus).
 db.salles.find({"avis.note": {$lte:10, $gt:8}}, {"_id":0, nom:1})
@@ -58,17 +58,23 @@ db.salles.find({"avis.date": {$gt: ISODate("2019-11-15T00:00:00.000+00:00")}},{"
 
 
 ### Exercice 11: Affichez le nom ainsi que la capacité des salles dont le produit de la valeur de l’identifiant par 100 est strictement supérieur à la capacité.
+db.salles.find({$expr: {$gt: [{$multiply: ["$_id", 100]}, "$capacite"]}},{"_id":0,"nom":1,"capacite":1})
+
 
 ### Exercice 12: Affichez le nom des salles de type SMAC programmant plus de deux styles de musiques différents en utilisant l’opérateur $where qui permet de faire usage de JavaScript.
+Passer 
 
 ### Exercice 13:Affichez les différents codes postaux présents dans les documents de la collection salles.
+db.salles.find({},{"_id":0, "adresse.codePostal":1})
 
 ### Exercice 14: Mettez à jour tous les documents de la collection salles en rajoutant 100 personnes à leur capacité actuelle.
+db.salles.updateMany({},{$inc: {"capacite":100}},{})
 
 ### Exercice 15:: Ajoutez le style « jazz » à toutes les salles qui n’en programment pas.
+db.salles.upadteMany({"styles": {$ne:jazz" }}, {$push: {"styles:"jazz"}})
 
 ### Exercice 16: Retirez le style «funk» à toutes les salles dont l’identifiant n’est égal ni à 2, ni à 3.
-
+pull 
 ### Exercice 17: Ajoutez un tableau composé des styles «techno» et « reggae » à la salle dont l’identifiant est 3.
 
 ### Exercice 18: Pour les salles dont le nom commence par la lettre P (majuscule ou minuscule), augmentez la capacité de 150 places et rajoutez un champ de type tableau nommé contact dans lequel se trouvera un document comportant un champ nommé telephone dont la valeur sera « 04 11 94 00 10 ».
