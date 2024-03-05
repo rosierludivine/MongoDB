@@ -13,21 +13,23 @@ db.salles.insertOne(
 ) 
 Que proposez-vous pour régulariser la situation ?
 
-
+```powershell
 r rules = {
 	"nom": {
-		"bsonType":"string", 		"description": "Chaine de caractères - obligatoire"
+		"bsonType":"string",
+        		"description": "Chaine de caractères - obligatoire"
 		},
 	"capacite":{
 		"bsonType": "int",
 		"description": "Entier - obligatoire"
 		},
-	"adresse.codePostal":{
+	"codePostal":{
 		"bsonType":"string",
 		"description": "Chaine de caractères - obligatoire"
-		}, 	"adresse.ville":{
-		"bsonType": "string", 		
-		"description":"Chaine de caractères - obligatoire"
+		},
+    "ville":{
+		    "bsonType": "string",	
+		    "description":"Chaine de caractères - obligatoire"
 		}
 }
 
@@ -37,13 +39,18 @@ db.runCommand(
        "validator": {
            $jsonSchema: {
                  "bsonType": "object",
-                 "required": ["nom", "capacite", "adresse.codePostal","adresse.ville"],
+                 "required": ["nom", "capacite", "codePostal","ville"],
                  "properties": rules
            }
        }
    }
 )
+```
 
+Nous pouvons constater que le documents n'est pas en accord avec les regles de validations.
+
+Voici l'erreur :
+MongoServerError: Document failed validation
 
 ### Exercice 2
 
