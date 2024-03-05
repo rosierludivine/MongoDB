@@ -22,26 +22,40 @@ db.employees.updateMany(
  
  ## TP Exo 
 
-### Exercice 1:Affichez l’identifiant et le nom des salles qui sont des SMAC.db.salles.find({},{"_id":1, "nom":1 })
+### Exercice 1:Affichez l’identifiant et le nom des salles qui sont des SMAC.
+db.salles.find({},{"_id":1, "nom":1 })
 
 ### Exercice 2 : Affichez le nom des salles qui possèdent une capacité d’accueil strictement supérieure à 1000 places.
 db.salles.find({"capacite": {$gt : 1000 }},{ "nom":1 })
 
 ### Exercice 3 : Affichez l’identifiant des salles pour lesquelles le champ adresse ne comporte pas de numéro.
+db.salles.find({"adresse.numero": {$exists:1}}, {"_id":1})
 
 ### Exercice 4: Affichez l’identifiant puis le nom des salles qui ont exactement un avis.
+db.salles.find({"avis": {$size:1}},{"_id":0, "nom":1})
 
 ### Exercice 5: Affichez tous les styles musicaux des salles qui programment notamment du blues.
+db.salles.find({"styles": "blues"},{"_id":0, "nom":1})
+
 
 ### Exercice 6 : Affichez tous les styles musicaux des salles qui ont le style « blues » en première position dans leur tableau styles.
+db.salles.find({"styles.0": "blues"},{"_id":0, "nom":1})
+
 
 ### Exercice 7 : Affichez la ville des salles dont le code postal commence par 84 et qui ont une capacité strictement inférieure à 500 places (pensez à utiliser une expression régulière).
 
+
+
 ### Exercice 8 : Affichez l’identifiant pour les salles dont l’identifiant est pair ou le champ avis est absent.
+db.salles.find({"styles.0": "blues"},{"_id":0, "nom":1})
 
 ### Exercice 9 : Affichez le nom des salles dont au moins un des avis comporte une note comprise entre 8 et 10 (tous deux inclus).
+db.salles.find({"avis.note": {$lte:10, $gt:8}}, {"_id":0, nom:1})
+
 
 ### Exercice 10: Affichez le nom des salles dont au moins un des avis comporte une date postérieure au 15/11/2019 (pensez à utiliser le type JavaScript Date).
+db.salles.find({"avis.date": {$gt: ISODate("2019-11-15T00:00:00.000+00:00")}},{"_id":0, "nom":1})
+
 
 ### Exercice 11: Affichez le nom ainsi que la capacité des salles dont le produit de la valeur de l’identifiant par 100 est strictement supérieur à la capacité.
 
