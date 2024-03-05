@@ -53,6 +53,17 @@ var marseille = {"type": "Point", "coordinates": [43.300000, 5.400000]}
  
 db.salles.find(...) 
 
+###### Pas fini l'exercice erreur 
+```
+db.salles.find({"adresse.localisation":{
+$nearSphere: {
+$geometry:marseille,
+},
+$maxDistance: 100 * 1000}
+},{"_id":0, "ville":1})
+
+```
+
 ### Exercice 3:
 
 Soit polygone un objet GeoJSON de la forme suivante :
