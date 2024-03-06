@@ -13,7 +13,7 @@ db.salles.insertOne(
 ) 
 Que proposez-vous pour régulariser la situation ?
 
-```powershell
+```json
 r rules = {
 	"nom": {
 		"bsonType":"string",
