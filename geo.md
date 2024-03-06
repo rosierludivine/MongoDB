@@ -53,16 +53,26 @@ var marseille = {"type": "Point", "coordinates": [43.300000, 5.400000]}
  
 db.salles.find(...) 
 
-###### Pas fini l'exercice erreur 
+###### Creation d'un index afin de pouvoir faire la requete 
+db.salles.createIndex({"adresse.localisation": "2dsphere"})
+
+###### Faire la requete suivante 
 ```
-db.salles.find({"adresse.localisation":{
-$nearSphere: {
-$geometry:marseille,
-},
-$maxDistance: 100 * 1000}
-},{"_id":0, "ville":1})
+db.salles.find({
+  "adresse.localisation": {
+    $nearSphere: {
+      $geometry: marseille,
+      $maxDistance: 10000 // Distance maximale en mètres
+    }
+  }
+}, {
+  "_id": 0,
+  "ville": 1
+})
+
 
 ```
+
 
 ### Exercice 3:
 
@@ -80,3 +90,16 @@ var polygone = {
      ] 
 } 
 Donnez le nom des salles qui résident à l’intérieur.
+
+###### Pour trouver qu'elle salle es dans le polygones il faut copier  coller le var polygone et ecrire cette requete
+
+db.salles.find({
+  "adresse.localisation": {
+    $geoWithin: {
+      $geometry: polygone
+    }
+  }
+}, {
+  "_id": 0,
+  "nom": 1
+})
