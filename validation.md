@@ -96,7 +96,7 @@ Rajoutez aux critères de validation existants le critère suivant :
 Le champ smac doit être présent OU les styles musicaux doivent figurer parmi les suivants : "jazz", "soul", "funk" et "blues".
 
 Que se passe-t-il lorsque nous exécutons la mise à jour suivante ?
-
+```js
 db.salles.update({"_id": 3}, {$set: {"verifie": false}})
 
 
@@ -104,4 +104,4 @@ db.personnes.drop();
 
   db.personnes.insertMany(   [ {"nom": "Durand", "prenom": "René", "interets": ["jardinage", "bricolage"], "age": 77},  {"nom": "Durand", "prenom": "Gisèle", "interets": ["bridge", "cuisine"], "age": 75},  {"nom": "Dupont", "prenom": "Gaston", "interets": ["jardinage",   "pétanque"], "age": 79},  {"nom": "Dupont", "prenom": "Catherine", "interets": ["cuisine"], "age": 66},  {"nom": "Duport", "prenom": "Eric", "interets": ["cuisine", "pétanque"], "age": 57},  {"nom": "Duport", "prenom": "Arlette","interets": ["jardinage"], "age": 80},  {"nom": "Lejeune", "prenom": "Jean","interets": ["jardinage"], "age": 75},  {"nom": "Lejeune", "prenom": "Mariette","interets": ["jardinage", "bridge"], "age": 66}  ]  )  
 
- 
+ ```

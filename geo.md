@@ -14,6 +14,7 @@ var requete = { ... };
 db.salles.find(requete ... }; 
 
 ##### reponse 
+```js
 var KilometresEnRadians = function(kilometres){ 
 
    var rayonTerrestreEnKm = 6371; 
@@ -43,7 +44,7 @@ var requete = {
 };
  
 db.salles.find(requete, { _id: 0, nom: 1 });
-
+```
 
 ### Exercice 2:
 
@@ -52,12 +53,12 @@ db.salles.find(requete, { _id: 0, nom: 1 });
 var marseille = {"type": "Point", "coordinates": [43.300000, 5.400000]} 
  
 db.salles.find(...) 
-
-###### Creation d'un index afin de pouvoir faire la requete 
+```js
+//Creation d'un index afin de pouvoir faire la requete 
 db.salles.createIndex({"adresse.localisation": "2dsphere"})
 
-###### Faire la requete suivante 
-```
+// Faire la requete suivante 
+
 db.salles.find({
   "adresse.localisation": {
     $nearSphere: {
@@ -92,7 +93,7 @@ var polygone = {
 Donnez le nom des salles qui résident à l’intérieur.
 
 ###### Pour trouver qu'elle salle es dans le polygones il faut copier  coller le var polygone et ecrire cette requete
-
+```js
 db.salles.find({
   "adresse.localisation": {
     $geoWithin: {
@@ -103,3 +104,7 @@ db.salles.find({
   "_id": 0,
   "nom": 1
 })
+
+```
+Nom trouver par cette requete 
+Ainsi nous trouvons le nom: 'AJMI Jazz Club'

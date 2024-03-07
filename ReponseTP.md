@@ -53,8 +53,9 @@ db.salles.find({"styles": "blues"},{"_id":0, "nom":1})
 ```
 
 ### Exercice 6 : Affichez tous les styles musicaux des salles qui ont le style « blues » en première position dans leur tableau styles.
+```js
 db.salles.find({"styles.0": "blues"},{"_id":0, "nom":1})
-
+```
 
 ### Exercice 7 : Affichez la ville des salles dont le code postal commence par 84 et qui ont une capacité strictement inférieure à 500 places (pensez à utiliser une expression régulière).
 ```js
