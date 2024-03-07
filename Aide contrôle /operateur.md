@@ -6,6 +6,7 @@ un pipeline est souvent un tableau car on peut lister des informations
 ## Liste opérateur 
 
 ```js
+    $lookup //permet de faire des jointure 
     $addField // creer un nouveau champs 
     $unwind //decomposer les elements du tableau (affiche autant d'objet que de valeur dans la tableau)
     $project //permet d'afficher ce que nous allons voir en resultat 
@@ -89,6 +90,8 @@ Pour le ` $nearSphere ` le min et le max sont optionnel.
 
  ### Validation 
 
+
+
 ##### Schema de validation 
 ```js
 var rules = {
@@ -123,3 +126,17 @@ db.runCommand(
    }
 )
 ```
+
+##### lookup 
+
+```js
+db.ventes.aggregate([
+  {$unwind: "$artiste"},
+  {$lookup: {
+		"from": "artistes",
+		"localField": "artiste",
+		"foreignField": "nom",
+		"as": "detai_artiste"
+}}])
+```
+

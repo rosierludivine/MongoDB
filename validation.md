@@ -14,6 +14,7 @@ db.salles.insertOne(
 Que proposez-vous pour régulariser la situation ?
 
 ```json
+
 var rules = {
 	"nom": {
 		"bsonType":"string",
