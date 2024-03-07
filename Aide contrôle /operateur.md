@@ -1,17 +1,26 @@
 ## 
+un pipeline est souvent un tableau car on peut lister des informations 
  
  Collection contenaire qui contient des documents peut avoir comme similarité table 
 
 ## Liste opérateur 
 
 ```js
-    $gt // superieur 
+    $addField // creer un nouveau champs 
+    $unwind //decomposer les elements du tableau (affiche autant d'objet que de valeur dans la tableau)
+    $project //permet d'afficher ce que nous allons voir en resultat 
+    $sortByCount // trier et compter 
+    $buckets // regroupe les documents 
+    $cond // mettre une condition 
+    $gt // superieur mais ne prend pas la valeur 
+    $gte // 50 et plus egal ou superieur 
     $exists //verification d'une infomation (valeur true false 1 ou 0)
     $size // savoir la taille 
     $mod // modulo pour savoir si quelque chose est pair ou impair 
     $eq  // equal
     $not //pas equal n'ayant pas 
-    $lte // inferieur 
+    $lt // inferieur 
+    $lte // inferieur ou egal 
     $nin //n'ayant ni un ni l'autre 
     $expr // ecrire une expression 
     $regex //filtre regex 

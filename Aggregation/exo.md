@@ -134,3 +134,16 @@ var pipeline = [
 }]
 db.salles.aggregate(pipeline)
 ```
+
+```js
+var pipeline = [
+    {
+        $project: {"_id":0, "nom":1,"avis_excellent" :{
+            $filter: {
+                "input":"$avis",
+                "as":"item",
+                "cond": {$eq: ["$$item.note", 10]}
+            }
+        }}}
+]
+```
