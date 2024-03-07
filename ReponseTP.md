@@ -71,8 +71,9 @@ db.salles.find({"avis.note": {$lte:10, $gt:8}}, {"_id":0, nom:1})
 ```
 
 ### Exercice 10: Affichez le nom des salles dont au moins un des avis comporte une date postérieure au 15/11/2019 (pensez à utiliser le type JavaScript Date).
+```js
 db.salles.find({"avis.date": {$gt: ISODate("2019-11-15T00:00:00.000+00:00")}},{"_id":0, "nom":1})
-
+```
 
 ### Exercice 11: Affichez le nom ainsi que la capacité des salles dont le produit de la valeur de l’identifiant par 100 est strictement supérieur à la capacité.
 ```js
@@ -145,3 +146,4 @@ db.salles.replaceOne( { nom: "Pub Z" }, { nom: "Pub Z", capacite: 60 })
 db.salles.deleteOne({ _id: { $type: "objectId" }, capacite: { $lte: 60 }})
 ```
 ### Exercice 25: À l’aide de la méthode permettant de trouver un seul document et de le mettre à jour en même temps, réduisez de 15 personnes la capacité de la salle située à Nîmes.
+t
