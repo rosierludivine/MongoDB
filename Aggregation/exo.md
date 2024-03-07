@@ -125,14 +125,12 @@ db.salles.aggregate(pipeline)
 
 Écrivez le pipeline qui affichera le nom des `salles` ainsi qu’un `tableau nommé avis_excellents` qui contiendra uniquement les avis dont la note est de 10.
 
-```js
-var pipeline = [
-    {$unwind: "$avis"},
-    {$match: {"avis.note": {$eq: 10}}},
-    {$group :{
-        "_id":"$avis" , 
-        "avis_excellent": [{push }]
-    }},
-]
 
+```js
+//pas reussi a faire la suite pas compris 
+var pipeline = [
+  {$match: {"avis.note": {$eq: 10}}},
+  {$project: { "_id":0, "nom":1}
+}]
+db.salles.aggregate(pipeline)
 ```

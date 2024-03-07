@@ -14,7 +14,7 @@ db.salles.insertOne(
 Que proposez-vous pour régulariser la situation ?
 
 ```json
-r rules = {
+var rules = {
 	"nom": {
 		"bsonType":"string",
         		"description": "Chaine de caractères - obligatoire"
@@ -49,17 +49,45 @@ db.runCommand(
 
 Nous pouvons constater que le documents n'est pas en accord avec les regles de validations.
 
-Voici l'erreur :
+`Voici l'erreur :`
 MongoServerError: Document failed validation
 
 ### Exercice 2
 
 Rajoutez à vos critères de validation existants un critère supplémentaire : le champ _id devra dorénavant être de type entier (int) ou ObjectId.
 
+```js
+// Commande permettant d'ajouter _id
+rules._id = {
+    "anyOf": [
+        { "bsonType": "int" },
+        { "bsonType": "objectId" }
+    ],
+    "description": "Entier (int) ou ObjectId"
+};
+
+//Mettre a jour les rules
+db.runCommand({
+    "collMod": "salles",
+    "validator": {
+        "$jsonSchema": {
+            "bsonType": "object",
+            "required": ["_id", "nom", "capacite", "codePostal", "ville"],
+            "properties": rules
+        }
+    }
+});
+
+```
 Que se passe-t-il si vous tentez de mettre à jour l’ensemble des documents existants dans la collection à l’aide de la requête suivante :
 
 db.salles.updateMany({}, {$set: {"verifie": true}}) 
+
+voila l'erreur que la requete nous affiche 
+`Document failed validation`
+
 Supprimez les critères rajoutés à l’aide de la méthode delete en JavaScript
+
 
 ### Exercice 3
 
